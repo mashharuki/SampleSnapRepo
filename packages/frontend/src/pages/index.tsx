@@ -6,6 +6,7 @@ import {
   getSnap,
   sendHello,
   confirm,
+  getGasFee,
   shouldDisplayReconnectButton,
 } from '../utils';
 import {
@@ -140,6 +141,16 @@ const Index = () => {
     }
   };
 
+  const handleGetGasFee = async () => {
+    try {
+      // call sendHello method
+      await getGasFee();
+    } catch (e) {
+      console.error(e);
+      dispatch({ type: MetamaskActions.SetError, payload: e });
+    }
+  };
+
   return (
     <Container>
       <Heading>
@@ -235,13 +246,27 @@ const Index = () => {
             !shouldDisplayReconnectButton(state.installedSnap)
           }
         />
+        <Card
+          content={{
+            title: 'Get Gas Fee',
+            description:
+              'Display a custom message within a confirmation screen in MetaMask.',
+            button: (
+              <ConfirmButton
+                onClick={handleGetGasFee}
+                disabled={!state.installedSnap}
+              />
+            ),
+          }}
+          disabled={!state.installedSnap}
+          fullWidth={
+            state.isFlask &&
+            Boolean(state.installedSnap) &&
+            !shouldDisplayReconnectButton(state.installedSnap)
+          }
+        />
         <Notice>
-          <p>
-            Please note that the <b>snap.manifest.json</b> and{' '}
-            <b>package.json</b> must be located in the server root directory and
-            the bundle must be hosted at the location specified by the location
-            field.
-          </p>
+          <p>これは、開発用のDAppです。</p>
         </Notice>
       </CardContainer>
     </Container>

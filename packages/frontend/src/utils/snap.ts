@@ -73,4 +73,15 @@ export const confirm = async () => {
   });
 };
 
+/**
+ * Invoke the "getGasFee" method
+ */
+
+export const getGasFee = async () => {
+  await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: { snapId: defaultSnapOrigin, request: { method: 'getGasFee' } },
+  });
+};
+
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
