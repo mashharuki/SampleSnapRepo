@@ -104,6 +104,7 @@ const Index = () => {
 
   const handleConnectClick = async () => {
     try {
+      // connectSnap
       await connectSnap();
       const installedSnap = await getSnap();
 
@@ -119,6 +120,7 @@ const Index = () => {
 
   const handleSendHelloClick = async () => {
     try {
+      // call sendHello method
       await sendHello();
     } catch (e) {
       console.error(e);
@@ -129,7 +131,7 @@ const Index = () => {
   return (
     <Container>
       <Heading>
-        Welcome to <Span>template-snap</Span>
+        Welcome to <Span>Sample Snap Dapp</Span>
       </Heading>
       <Subtitle>
         Get started by editing <code>src/index.ts</code>
