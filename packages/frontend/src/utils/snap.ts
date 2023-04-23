@@ -62,4 +62,15 @@ export const sendHello = async () => {
   });
 };
 
+/**
+ * Invoke the "hello2" method
+ */
+
+export const confirm = async () => {
+  await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: { snapId: defaultSnapOrigin, request: { method: 'hello2' } },
+  });
+};
+
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');

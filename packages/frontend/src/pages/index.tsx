@@ -5,6 +5,7 @@ import {
   connectSnap,
   getSnap,
   sendHello,
+  confirm,
   shouldDisplayReconnectButton,
 } from '../utils';
 import {
@@ -12,6 +13,7 @@ import {
   InstallFlaskButton,
   ReconnectButton,
   SendHelloButton,
+  ConfirmButton,
   Card,
 } from '../components';
 
@@ -128,6 +130,16 @@ const Index = () => {
     }
   };
 
+  const handleSendHelloClick2 = async () => {
+    try {
+      // call sendHello method
+      await confirm();
+    } catch (e) {
+      console.error(e);
+      dispatch({ type: MetamaskActions.SetError, payload: e });
+    }
+  };
+
   return (
     <Container>
       <Heading>
@@ -193,6 +205,25 @@ const Index = () => {
             button: (
               <SendHelloButton
                 onClick={handleSendHelloClick}
+                disabled={!state.installedSnap}
+              />
+            ),
+          }}
+          disabled={!state.installedSnap}
+          fullWidth={
+            state.isFlask &&
+            Boolean(state.installedSnap) &&
+            !shouldDisplayReconnectButton(state.installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Confirm Snap',
+            description:
+              'Display a custom message within a confirmation screen in MetaMask.',
+            button: (
+              <ConfirmButton
+                onClick={handleSendHelloClick2}
                 disabled={!state.installedSnap}
               />
             ),

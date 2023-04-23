@@ -27,6 +27,14 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
           ]),
         },
       });
+    case 'hello2':
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          type: 'confirmation',
+          content: text(`This is test!!`),
+        },
+      });
     default:
       throw new Error('Method not found.');
   }
