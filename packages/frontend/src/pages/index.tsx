@@ -1,22 +1,26 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { MetamaskActions, MetaMaskContext } from '../hooks';
 import {
-  connectSnap,
-  getSnap,
-  sendHello,
-  confirm,
-  getGasFee,
-  shouldDisplayReconnectButton,
-} from '../utils';
-import {
+  Card,
+  ConfirmButton,
   ConnectButton,
+  GetAddressButton,
+  GetBalanceButton,
   InstallFlaskButton,
   ReconnectButton,
   SendHelloButton,
-  ConfirmButton,
-  Card,
 } from '../components';
+import { MetaMaskContext, MetamaskActions } from '../hooks';
+import {
+  confirm,
+  connectSnap,
+  getAddrss,
+  getBalance,
+  getGasFee,
+  getSnap,
+  sendHello,
+  shouldDisplayReconnectButton,
+} from '../utils';
 
 const Container = styled.div`
   display: flex;
@@ -151,6 +155,26 @@ const Index = () => {
     }
   };
 
+  const handleGetAddress = async () => {
+    try {
+      // call sendHello method
+      await getAddrss();
+    } catch (e) {
+      console.error(e);
+      dispatch({ type: MetamaskActions.SetError, payload: e });
+    }
+  };
+
+  const handleGetBalance = async () => {
+    try {
+      // call sendHello method
+      await getBalance();
+    } catch (e) {
+      console.error(e);
+      dispatch({ type: MetamaskActions.SetError, payload: e });
+    }
+  };
+
   return (
     <Container>
       <Heading>
@@ -254,6 +278,44 @@ const Index = () => {
             button: (
               <ConfirmButton
                 onClick={handleGetGasFee}
+                disabled={!state.installedSnap}
+              />
+            ),
+          }}
+          disabled={!state.installedSnap}
+          fullWidth={
+            state.isFlask &&
+            Boolean(state.installedSnap) &&
+            !shouldDisplayReconnectButton(state.installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Get Address',
+            description:
+              'Display a custom message within a confirmation screen in MetaMask.',
+            button: (
+              <GetAddressButton
+                onClick={handleGetAddress}
+                disabled={!state.installedSnap}
+              />
+            ),
+          }}
+          disabled={!state.installedSnap}
+          fullWidth={
+            state.isFlask &&
+            Boolean(state.installedSnap) &&
+            !shouldDisplayReconnectButton(state.installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Get Balance',
+            description:
+              'Display a custom message within a confirmation screen in MetaMask.',
+            button: (
+              <GetBalanceButton
+                onClick={handleGetBalance}
                 disabled={!state.installedSnap}
               />
             ),

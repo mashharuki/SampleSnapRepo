@@ -69,7 +69,13 @@ export const sendHello = async () => {
 export const confirm = async () => {
   await window.ethereum.request({
     method: 'wallet_invokeSnap',
-    params: { snapId: defaultSnapOrigin, request: { method: 'hello2' } },
+    params: {
+      snapId: defaultSnapOrigin,
+      request: {
+        method: 'hello2',
+      },
+      data: 'test!!!',
+    },
   });
 };
 
@@ -81,6 +87,28 @@ export const getGasFee = async () => {
   await window.ethereum.request({
     method: 'wallet_invokeSnap',
     params: { snapId: defaultSnapOrigin, request: { method: 'getGasFee' } },
+  });
+};
+
+/**
+ * get Address method
+ */
+
+export const getAddrss = async () => {
+  await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: { snapId: defaultSnapOrigin, request: { method: 'getAddress' } },
+  });
+};
+
+/**
+ * get Balance method
+ */
+
+export const getBalance = async () => {
+  await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: { snapId: defaultSnapOrigin, request: { method: 'getBalance' } },
   });
 };
 

@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import styled from 'styled-components';
-import { MetamaskState } from '../hooks';
 import { ReactComponent as FlaskFox } from '../assets/flask_fox.svg';
+import { MetamaskState } from '../hooks';
 import { shouldDisplayReconnectButton } from '../utils';
 
 const Link = styled.a`
@@ -100,6 +100,14 @@ export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
 
 export const ConfirmButton = (props: ComponentProps<typeof Button>) => {
   return <Button {...props}>Confirm</Button>;
+};
+
+export const GetAddressButton = (props: ComponentProps<typeof Button>) => {
+  return <Button {...props}>GetAddress</Button>;
+};
+
+export const GetBalanceButton = (props: ComponentProps<typeof Button>) => {
+  return <Button {...props}>GetBalance</Button>;
 };
 
 export const HeaderButtons = ({

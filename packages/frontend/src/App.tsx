@@ -5,6 +5,7 @@ import { Footer, Header } from './components';
 import { GlobalStyle } from './config/theme';
 import { ToggleThemeContext } from './Root';
 
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
